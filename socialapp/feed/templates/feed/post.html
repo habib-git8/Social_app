@@ -1,0 +1,64 @@
+{% extends 'feed/main.html' %}
+
+{% block content %}
+<div>
+    <form method="POST" enctype="multipart/form-data" id="postForm" style="margin-top: 70px;">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="inputTitle" style="color: black;">Post Title</label>
+            {{ form.title }}
+            <small class="text-danger">{{ form.title.errors }}</small>
+        </div>
+
+        <div class="form-group">
+            <label for="inputContent"  style="color: black;" >Content</label>
+            {{ form.content }}
+            <small class="text-danger">{{ form.content.errors }}</small>
+        </div>
+
+        <div class="form-group">
+            <label for="inputImage" style="color: black;" >Upload Image</label>
+            {{ form.image }}
+            <small class="text-danger">{{ form.image.errors }}</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("postForm").addEventListener("submit", function(event) {
+        let isValid = true;
+
+        let title = document.getElementById("id_title").value.trim();
+        let content = document.getElementById("id_content").value.trim();
+        let image = document.getElementById("id_image").value;
+
+        // Title validation
+        if (title === "") {
+            alert("Title cannot be empty.");
+            isValid = false;
+        }
+
+        // Content validation
+        if (content.length < 10) {
+            alert("Content must be at least 10 characters.");
+            isValid = false;
+        }
+
+        // Image validation
+        if (image === "") {
+            alert("Please upload an image.");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+});
+</script>
+
+{% endblock %}

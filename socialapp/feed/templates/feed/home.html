@@ -1,0 +1,31 @@
+{% extends 'feed/main.html' %}
+
+{% block content %}
+<header class="bg-primary bg-gradient text-white">
+    <div class="container px-4 text-center">
+        <h1 class="fw-bolder">Welcome to ScrollSphere</h1>
+        <p class="lead">Endless Stories, Infinite Connections</p>
+        <a class="btn btn-lg btn-light" href="/feed">Start scrolling!</a>
+    </div>
+</header>
+<!-- About section-->
+<section id="about">
+    <div class="container px-4">
+        <div class="row gx-4 justify-content-center">
+            <div class="col-lg-8"  style="color: black;">
+                <h2>About ScrollSphere</h2>
+                <p class="lead">ScrollSphere is a next-gen social app designed for seamless engagement, endless content discovery, and meaningful connections. Whether you're here to stay updated, share stories, or interact with a vibrant community, ScrollSphere makes it effortless.</p>
+                <ul>
+                    <li>Smooth infinite scrolling for a seamless user experience</li>
+            <li>Personalized content feed tailored to your interests</li>
+            <li>Real-time engagement through comments, likes, and shares</li>
+            <li>Integrated AI-powered recommendations</li>
+            <li>Privacy-focused settings for a secure social space</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'feed/footer.html' %}
+
+{% endblock %}
