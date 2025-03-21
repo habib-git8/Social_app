@@ -84,3 +84,4 @@ def delete_post(request, post_id):
         return redirect('feed')
     
     return render(request, 'feed/delete_post.html', {'post': post})
+
