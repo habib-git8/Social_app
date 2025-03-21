@@ -1,4 +1,4 @@
-name: Deploy to Elastic Beanstalk
+name: Deploy Django to Elastic Beanstalk
 
 on:
   push:
@@ -24,6 +24,11 @@ jobs:
         source venv/bin/activate
         pip install -r requirements.txt
 
+    - name: Run Django tests
+      run: |
+        source venv/bin/activate
+        python manage.py test
+
     - name: Install AWS CLI
       run: |
         sudo apt update
@@ -42,6 +47,13 @@ jobs:
         EB_APPLICATION_NAME: ${{ secrets.EB_APPLICATION_NAME }}
         EB_ENVIRONMENT_NAME: ${{ secrets.EB_ENVIRONMENT_NAME }}
       run: |
-        zip -r deploy.zip . -x "*.git*"
-        aws elasticbeanstalk create-application-version --application-name "$EB_APPLICATION_NAME" --version-label "v${{ github.run_number }}" --source-bundle S3Bucket="elasticbeanstalk-$AWS_REGION",S3Key="deploy.zip"
-        aws elasticbeanstalk update-environment --application-name "$EB_APPLICATION_NAME" --environment-name "$EB_ENVIRONMENT_NAME" --version-label "v${{ github.run_number }}"
+        zip -r deploy.zip . -x "*.git*" "venv/*" "__pycache__/*"
+        aws s3 cp deploy.zip s3://elasticbeanstalk-$AWS_REGION/deploy.zip
+        aws elasticbeanstalk create-application-version \
+          --application-name "$EB_APPLICATION_NAME" \
+          --version-label "v${{ github.run_number }}" \
+          --source-bundle S3Bucket="elasticbeanstalk-$AWS_REGION",S3Key="deploy.zip"
+        aws elasticbeanstalk update-environment \
+          --application-name "$EB_APPLICATION_NAME" \
+          --environment-name "$EB_ENVIRONMENT_NAME" \
+          --version-label "v${{ github.run_number }}"
