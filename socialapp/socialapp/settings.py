@@ -76,14 +76,11 @@ WSGI_APPLICATION = 'socialapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SocialDatabase',
-        'USER': 'postgres',
-        'PASSWORD': '2222',
-        'HOST': 'localhost',  # Replace this with Railway's public PostgreSQL host
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(
+        "postgresql://postgres:vLjBRATDROeXEIxraBXKUDjzYweJEviH@caboose.proxy.rlwy.net:51677/railway",
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
