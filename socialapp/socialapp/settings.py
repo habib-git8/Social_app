@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,13 +75,17 @@ WSGI_APPLICATION = 'socialapp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'SocialDatabase',
+        'USER': 'postgres',
+        'PASSWORD': '2222',
+        'HOST': 'localhost',  # Replace this with Railway's public PostgreSQL host
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
