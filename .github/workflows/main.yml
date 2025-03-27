@@ -1,0 +1,51 @@
+name: Deploy Django App to AWS Elastic Beanstalk
+
+on:
+  push:
+    branches:
+      - main  # Change this to your deployment branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'  # Use your Django project's Python version
+
+      - name: Install dependencies
+        run: |
+          cd socialapp  # Change to the correct directory
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Tests
+        run: |
+          cd socialapp
+          python manage.py test
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to AWS Elastic Beanstalk
+        env:
+          AWS_REGION: us-east-1  # Change to your AWS region
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          APPLICATION_NAME: demoenv  # Change to your Elastic Beanstalk app name
+          ENVIRONMENT_NAME: demoenv-env  # Change to your environment name
+        run: |
+          pip install awsebcli
+          eb init $APPLICATION_NAME --platform "Python 3.8" --region $AWS_REGION
+          eb use $ENVIRONMENT_NAME
+          eb deploy
