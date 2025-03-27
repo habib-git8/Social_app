@@ -26,6 +26,7 @@ jobs:
 
       - name: Run Tests
         run: |
+          cd socialapp
           python manage.py test
 
   deploy:
