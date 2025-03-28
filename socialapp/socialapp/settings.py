@@ -30,7 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['demoenv.eba-2eyxpeas.us-east-1.elasticbeanstalk.com',
     '127.0.0.1',
     'localhost',
-    '172.31.34.220',]
+    '172.31.37.209',]
 
 
 # Application definition
