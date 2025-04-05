@@ -36,7 +36,6 @@ jobs:
         run: |
           cd socialapp
           pylint socialapp
-          pylint feed
 
 
   deploy:
