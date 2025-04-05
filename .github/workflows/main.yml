@@ -28,6 +28,13 @@ jobs:
         run: |
           cd socialapp
           python manage.py test
+      - name: Install Pylint
+        run: |
+          pip install pylint
+
+      - name: Run Pylint
+        run: |
+          pylint socialapp
 
   deploy:
     needs: build
