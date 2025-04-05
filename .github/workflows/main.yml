@@ -35,8 +35,9 @@ jobs:
       - name: Run Pylint
         run: |
           cd socialapp
-          pylint feed
           pylint socialapp
+          pylint feed
+
 
   deploy:
     needs: build
