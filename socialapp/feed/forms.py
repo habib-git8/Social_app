@@ -1,9 +1,16 @@
+"""
+This module contains form classes used for handling user signups, post creation, 
+and custom user registration.
+"""
 from django import forms
-from .models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from .models import Post
 class PostForm(forms.ModelForm):
+    """
+    Form for creating and updating posts.
+    It handles the title, content, and image fields for a post.
+    """
     class Meta:
         model = Post
         fields = ['title', 'content', 'image']
@@ -13,28 +20,27 @@ class PostForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your content', 'rows': 4}),  
             'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
         }
-
         error_messages = {
             'title': {'required': 'Post title is required'},
             'content': {'required': 'Please provide some content'},
             'image': {'required': 'Please upload an image'},
         }
-
 class SignupForm(UserCreationForm):
+    """
+    Form for user signup, including email field.
+    """
     email = forms.EmailField(required=True)
-
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
-
 class CustomUserCreationForm(UserCreationForm):
+    """
+    Custom user creation form with email validation and password matching.
+    """
     email = forms.EmailField(required=True)  # Ensure email is required
-
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
-
     def clean(self):
         cleaned_data = super().clean()
         password1 = cleaned_data.get("password1")
