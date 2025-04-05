@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignupForm, CustomUserCreationForm, PostForm
 from .models import Post
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 def home(request):
     """
@@ -63,7 +64,7 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
     return render(request, "feed/signup.html", {"form": form})
-@login_required
+@login_required(login_url='/login/') 
 def create_post(request):
     """
     Create a new post. If the form is valid, save the post and redirect to the feed.
