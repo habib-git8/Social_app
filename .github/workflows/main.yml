@@ -43,8 +43,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-          APPLICATION_NAME: demoproject  # Change to your Elastic Beanstalk app name
-          ENVIRONMENT_NAME: demoenv  # Change to your environment name
+          APPLICATION_NAME: x24170658socialapp  # Change to your Elastic Beanstalk app name
+          ENVIRONMENT_NAME: x24170658socialapp-env  # Change to your environment name
         run: |
           cd socialapp
           pip install awsebcli
