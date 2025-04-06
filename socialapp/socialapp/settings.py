@@ -30,7 +30,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['socialappproj-env.eba-gbuciki6.us-east-1.elasticbeanstalk.com',
     '127.0.0.1',
     'localhost',
-    '172.31.86.222',]
+    '172.31.86.222',
+     '3.83.29.195',]           ]
 
 
 # Application definition
