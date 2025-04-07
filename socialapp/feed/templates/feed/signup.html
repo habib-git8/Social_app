@@ -13,7 +13,7 @@
     </form>
     <a href="{% url 'login' %}">Already have an account? Log in</a> -->
 
-    <form method="POST"  style="margin-top: 70px;">
+    <form method="POST"  style="margin-top: 70px; color: black;">
         {% csrf_token %}
         
         <!-- Username Field -->
@@ -78,9 +78,9 @@
     {% endif %}
     
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button type="submit" class="btn btn-primary" >Sign Up</button>
     </form>
-    <a href="{% url 'login' %}">Already have an account? Log in</a>
+    <a style="color: black;" href="{% url 'login' %}">Already have an account? Log in</a>
     
 {% endblock %}
 
