@@ -60,10 +60,3 @@ jobs:
           eb init $APPLICATION_NAME --platform "Python 3.8" --region $AWS_REGION
           eb use $ENVIRONMENT_NAME
           eb deploy
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.HOST }} << 'EOF'
-            pkill gunicorn || true
-            cd /home/ec2-user/socialapp 
-            source venv/bin/activate
-            nohup gunicorn --workers 3 --bind 0.0.0.0:8000 yourproject.wsgi:application &
-          
-          EOF
